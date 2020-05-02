@@ -1,0 +1,50 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin 2s linear;
+  position: relative;
+  height: 80px;
+}
+
+.App-header {
+  background-color:pink;
+  height: 100%;
+  padding: 20px;
+  color: white;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(1080deg); }
+  from {left: 0px;}
+  to {left: 100%;}
+}
+
+.links {
+  display: block;
+  width: 250px;
+  font-family: sans-serif;
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
+  line-height: 1.5rem;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  span {
+    background-image: linear-gradient(to bottom, white 70%, transparent 70%), linear-gradient(to right, $violet 33%, $blue 33%, $blue 66%, $teal 66%);
+    background-size: 306% 100%;
+    background-position: 100% 0;
+    transition: 1s background-position;
+  }
+  &:hover span {
+    background-position: 0%;
+  }
+}
