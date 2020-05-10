@@ -1,0 +1,16 @@
+<div class="content__u3I1 question-content__JfgR"><div><p>Given a list of intervals, remove all intervals that are covered by another interval in the list. Interval <code>[a,b)</code> is covered by interval <code>[c,d)</code> if and only if <code>c &lt;= a</code> and <code>b &lt;= d</code>.</p>
+<p>After doing so, return the number of remaining intervals.</p>
+<p> </p>
+<p><strong>Example 1:</strong></p>
+<pre><strong>Input:</strong> intervals = [[1,4],[3,6],[2,8]]
+<strong>Output:</strong> 2
+<b>Explanation: </b>Interval [3,6] is covered by [2,8], therefore it is removed.
+</pre>
+<p> </p>
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= intervals.length &lt;= 1000</code></li>
+<li><code>0 &lt;= intervals[i][0] &lt; intervals[i][1] &lt;= 10^5</code></li>
+<li><code>intervals[i] != intervals[j]</code> for all <code>i != j</code></li>
+</ul>
+</div></div>

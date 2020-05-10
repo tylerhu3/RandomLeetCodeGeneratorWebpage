@@ -1,35 +1,28 @@
-import React, { Component } from "react";
-import logo from "./x.png";
+import React from "react";
 import "./App.css";
+import * as THREE from "three";
+import HALO from "./vanta.halo.min.js";
 import jsonData from "./data2.json";
-/**
- * 
-below is how we can inject html code into our webpage:
 
-const x = "<h1> Big PP Boi </h1>";
-<div dangerouslySetInnerHTML={{ __html: x }} />
-
-Notice that we can take the string we made above and simple
-paste it into the div tag with dangerouslySetInnerHTML.
-This is dangerous because of what can happen but because
-only we can use this, it should be ok. 
-
-*/
-
-class App extends Component {
-  getRandomInt = (max) => {
-    return Math.floor(Math.random() * Math.floor(max));
-  };
-
+class App extends React.Component {
   state = {
     easy: [],
     medium: [],
     hard: [],
-    rotate: true,
     theProblem: null,
+    effectsOn: false,
   };
 
+  constructor() {
+    super();
+    this.vantaRef = React.createRef();
+  }
+
   componentDidMount() {
+    this.vantaEffect = HALO({
+      el: this.vantaRef.current,
+      THREE: THREE,
+    });
     let easy = [];
     let medium = [];
     let hard = [];
@@ -43,6 +36,7 @@ class App extends Component {
         hard.push(x);
       }
     });
+
     let x = this.getRandomInt(jsonData.length);
 
     let prob = jsonData[x];
@@ -50,9 +44,40 @@ class App extends Component {
     console.log("easy", easy);
     console.log("Medum ", medium);
     console.log("hard ", hard);
-
     this.setState({ theProblem: prob, easy: easy, medium: medium, hard: hard });
   }
+
+  componentWillUnmount() {
+    if (this.vantaEffect) {
+      this.vantaEffect.destroy();
+    }
+  }
+
+  render() {
+
+    // console.log(jsonData);
+    let problem = this.state.theProblem;
+    // console.log(problem);
+    return (
+      <div className="App" ref={this.vantaRef}>
+        <button onClick={()=>{
+          if (this.vantaEffect) {
+            this.vantaEffect.destroy();
+          }
+        }}> Destroy Effect </button>
+   
+        <a className="center-screen leetFont" target="_blank" href={(problem) ? problem.url: ""}>
+          
+          <span>{(problem) ? (problem.num + " " + problem.title + " " + problem.diff): ""}</span>
+        </a>
+          
+      </div>
+    );
+  }
+
+  getRandomInt = (max) => {
+    return Math.floor(Math.random() * Math.floor(max));
+  };
 
   random = () => {
     let x = this.getRandomInt(jsonData.length);
@@ -77,33 +102,6 @@ class App extends Component {
     let prob = this.state.hard[x];
     this.setState({ theProblem: prob });
   };
-
-  render() {
-    // setTimeout ( ()=>{console.log("ranran");this.setState({rotate:false})}, 2000 );
-    if (this.state.theProblem === null) {
-      console.log("nonono");
-      return <div />;
-    }
-    console.log(jsonData);
-    let problem = this.state.theProblem;
-    console.log(problem);
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img
-            src={logo}
-            className={this.state.rotate ? "App-logo" : ""}
-            alt="logo"
-          />
-        </div>
-        <a className="links" target="_blank" href={problem.url}>
-          {" "}
-          <span>{problem.num + " " + problem.title + " " + problem.diff}</span>
-        </a>
-
-      </div>
-    );
-  }
 }
 
 export default App;
