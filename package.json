@@ -9,6 +9,7 @@
     "react": "^16.13.1",
     "react-confetti": "^5.0.1",
     "react-dom": "^16.13.1",
+    "react-particles-js": "^3.2.1",
     "react-scripts": "0.9.5",
     "three": "^0.116.1",
     "vanta": "^0.5.15"

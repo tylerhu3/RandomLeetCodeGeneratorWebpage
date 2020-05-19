@@ -4,18 +4,34 @@
   /* text-align: center; */
 }
 
-
+#particles-js {
+  text-align: center;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .center-screen {
   font-size: large;
   color:white;
+  background-color: brown;
   font-family: "Comic Sans MS", cursive, sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  min-height: 100vh;
+  /* min-height: 100vh; */
+}
+
+.particles-js-canvas-el{
+
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
 }
 
 .App-logo {
@@ -25,7 +41,6 @@
 
 
 .App-intro {
-
   font-size: large;
 }
 

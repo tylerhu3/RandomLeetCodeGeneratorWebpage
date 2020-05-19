@@ -1,28 +1,28 @@
 import React from "react";
 import "./App.css";
-import * as THREE from "three";
-import HALO from "./vanta.halo.min.js";
 import jsonData from "./data2.json";
+import Particles from 'react-particles-js';
 
 class App extends React.Component {
+
   state = {
     easy: [],
     medium: [],
     hard: [],
     theProblem: null,
-    effectsOn: false,
   };
 
   constructor() {
     super();
-    this.vantaRef = React.createRef();
+    // this.vantaRef = React.createRef();
   }
 
   componentDidMount() {
-    this.vantaEffect = HALO({
-      el: this.vantaRef.current,
-      THREE: THREE,
-    });
+    // this.vantaEffect = HALO({
+    //   el: this.vantaRef.current,
+    //   THREE: THREE,
+    // });
+
     let easy = [];
     let medium = [];
     let hard = [];
@@ -57,22 +57,75 @@ class App extends React.Component {
 
     // console.log(jsonData);
     let problem = this.state.theProblem;
-    // console.log(problem);
     return (
-      <div className="App" ref={this.vantaRef}>
-        <button onClick={()=>{
-          if (this.vantaEffect) {
-            this.vantaEffect.destroy();
-          }
-        }}> Destroy Effect </button>
-   
-        <a className="center-screen leetFont" target="_blank" href={(problem) ? problem.url: ""}>
-          
+      <div>
+        <div id="particles-js">
+          <h3>SAD </h3>
+        <a  target="_blank" href={(problem) ? problem.url: ""}>
           <span>{(problem) ? (problem.num + " " + problem.title + " " + problem.diff): ""}</span>
         </a>
-          
+        </div>
+        {this.particles0()}
       </div>
     );
+  }
+
+
+  particles0 = () => {
+    return(
+      <Particles
+    params={{
+	    "particles": {
+	        "number": {
+	            "value": 160,
+	            "density": {
+	                "enable": false
+	            }
+	        },
+	        "size": {
+	            "value": 3,
+	            "random": true,
+	            "anim": {
+	                "speed": 4,
+	                "size_min": 0.3
+	            }
+	        },
+	        "line_linked": {
+	            "enable": false
+	        },
+	        "move": {
+	            "random": true,
+	            "speed": 1,
+	            "direction": "top",
+	            "out_mode": "out"
+	        }
+	    },
+	    "interactivity": {
+	        "events": {
+	            "onhover": {
+	                "enable": true,
+	                "mode": "bubble"
+	            },
+	            "onclick": {
+	                "enable": true,
+	                "mode": "repulse"
+	            }
+	        },
+	        "modes": {
+	            "bubble": {
+	                "distance": 250,
+	                "duration": 2,
+	                "size": 0,
+	                "opacity": 0
+	            },
+	            "repulse": {
+	                "distance": 400,
+	                "duration": 4
+	            }
+	        }
+	    }
+	}} />
+    )
   }
 
   getRandomInt = (max) => {
