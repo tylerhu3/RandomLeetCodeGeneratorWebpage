@@ -1,8 +1,10 @@
 import React from "react";
 import "./App.css";
 import * as THREE from "three";
-import HALO from "./vanta.halo.min.js";
+import HALO from "./vanta.cells.min.js";
 import jsonData from "./data2.json";
+import ReactTypingEffect from "react-typing-effect";
+import "./_buttons.scss";
 
 class App extends React.Component {
   state = {
@@ -54,23 +56,42 @@ class App extends React.Component {
   }
 
   render() {
-
     // console.log(jsonData);
     let problem = this.state.theProblem;
     // console.log(problem);
     return (
       <div className="App" ref={this.vantaRef}>
-        <button onClick={()=>{
-          if (this.vantaEffect) {
-            this.vantaEffect.destroy();
-          }
-        }}> Destroy Effect </button>
-   
-        <a className="center-screen leetFont" target="_blank" href={(problem) ? problem.url: ""}>
-          
-          <span>{(problem) ? (problem.num + " " + problem.title + " " + problem.diff): ""}</span>
-        </a>
-          
+        <div onClick={this.randomEasy} className="box">
+          <a href="#" className="btn btn-white btn-animation-1">
+            Easy Question
+          </a>
+        </div>
+        {/* <button
+          onClick={() => {
+            if (this.vantaEffect) {
+              this.vantaEffect.destroy();
+            }
+          }}
+        >
+          {" "}
+          Destroy Effect{" "}
+        </button> */}
+
+        <div className="center-screen leetFont">
+          <a
+            style={{ textDecoration: "none" }}
+            target="_blank"
+            href={problem ? problem.url : ""}
+          >
+            <ReactTypingEffect
+              text={
+                problem
+                  ? problem.num + " " + problem.title + " " + problem.diff
+                  : ""
+              } //text=["Hello.", "World!"]
+            />
+          </a>
+        </div>
       </div>
     );
   }
