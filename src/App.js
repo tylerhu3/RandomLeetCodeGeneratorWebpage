@@ -1,10 +1,11 @@
 import React from "react";
 import "./App.css";
 import jsonData from "./data2.json";
-import Particles from 'react-particles-js';
+import Particles from "react-particles-js";
+import { Button } from "react-bootstrap";
+import Typing from "react-typing-animation";
 
 class App extends React.Component {
-
   state = {
     easy: [],
     medium: [],
@@ -18,11 +19,6 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // this.vantaEffect = HALO({
-    //   el: this.vantaRef.current,
-    //   THREE: THREE,
-    // });
-
     let easy = [];
     let medium = [];
     let hard = [];
@@ -37,96 +33,183 @@ class App extends React.Component {
       }
     });
 
-    let x = this.getRandomInt(jsonData.length);
-
-    let prob = jsonData[x];
-
-    console.log("easy", easy);
-    console.log("Medum ", medium);
-    console.log("hard ", hard);
+    let index = this.getRandomInt(jsonData.length);
+    let prob = jsonData[index];
     this.setState({ theProblem: prob, easy: easy, medium: medium, hard: hard });
   }
 
   componentWillUnmount() {
-    if (this.vantaEffect) {
-      this.vantaEffect.destroy();
-    }
+    // if (this.vantaEffect) {
+    //   this.vantaEffect.destroy();
+    // }
   }
 
-  render() {
+  openInNewTab = (url) => {
+    const newWindow = window.open(url, "_blank", "noopener,noreferrer");
+    if (newWindow) newWindow.opener = null;
+  };
 
+  AnimatedTypingComponent = () => (
+    <div
+      style={{ width: "100%",  textShadow: '2px 2px 4px #000000',
+      color: "white", fontSize: "290%" }}
+      onClick={() => this.openInNewTab(this.state.theProblem.url)}
+    >
+      <Typing
+        key={new Date().getTime()} //force a component re-render
+      >
+        <span >
+          {" "}
+          {this.state.theProblem
+            ? this.state.theProblem.title + "SSDS"
+            : ""}{" "}
+        </span>
+        <Typing.Backspace count={5} />
+      </Typing>
+    </div>
+  );
+
+  render() {
     // console.log(jsonData);
     let problem = this.state.theProblem;
     return (
-      <div>
-        <div id="particles-js">
-          <h3>SAD </h3>
-        <a  target="_blank" href={(problem) ? problem.url: ""}>
-          <span>{(problem) ? (problem.num + " " + problem.title + " " + problem.diff): ""}</span>
-        </a>
-        </div>
+      <div className={"App"}>
         {this.particles0()}
+
+        <div className={"mainContent"}>
+          {this.AnimatedTypingComponent()}
+          <div style={this.contentStyle}>
+            <Button
+              style={this.buttonStyle}
+              size="lg"
+              variant="primary"
+              onClick={() => this.openInNewTab(problem.url)}
+            >
+              Try It{" "}
+            </Button>
+            <Button
+              style={this.buttonStyle}
+              variant="info"
+              onClick={this.random}
+            >
+              New Question{" "}
+            </Button>
+            <Button
+              style={this.buttonStyle}
+              variant="success"
+              onClick={this.randomEasy}
+            >
+              New Easy Question{" "}
+            </Button>
+            <Button
+              style={this.buttonStyle}
+              variant="warning"
+              onClick={this.randomMed}
+            >
+              New Medium Question{" "}
+            </Button>
+            <Button
+              style={this.buttonStyle}
+              variant="danger"
+              onClick={this.randomHard}
+            >
+              New Hard Question{" "}
+            </Button>
+          </div>
+        </div>
       </div>
     );
   }
 
+  miscButtonStyle = {
+    position: "relative",
+    right: 0,
+    bottom: 0,
+  };
+
+  contentStyle = {
+    position: "relative",
+    zIndex: "2",
+  };
+
+  titleStyle = {
+    marginBottom: "15px",
+  };
+
+  buttonStyle = {
+    margin: "10px",
+  };
+
+  divStyle = {
+    position: "relative",
+    zIndex: "1",
+    left: 0,
+
+    backgroundImage:
+      "url(" +
+      "hhttps://www.economist.com/sites/default/files/20171216_blp513.jpg" +
+      ")",
+  };
 
   particles0 = () => {
-    return(
+    return (
       <Particles
-    params={{
-	    "particles": {
-	        "number": {
-	            "value": 160,
-	            "density": {
-	                "enable": false
-	            }
-	        },
-	        "size": {
-	            "value": 3,
-	            "random": true,
-	            "anim": {
-	                "speed": 4,
-	                "size_min": 0.3
-	            }
-	        },
-	        "line_linked": {
-	            "enable": false
-	        },
-	        "move": {
-	            "random": true,
-	            "speed": 1,
-	            "direction": "top",
-	            "out_mode": "out"
-	        }
-	    },
-	    "interactivity": {
-	        "events": {
-	            "onhover": {
-	                "enable": true,
-	                "mode": "bubble"
-	            },
-	            "onclick": {
-	                "enable": true,
-	                "mode": "repulse"
-	            }
-	        },
-	        "modes": {
-	            "bubble": {
-	                "distance": 250,
-	                "duration": 2,
-	                "size": 0,
-	                "opacity": 0
-	            },
-	            "repulse": {
-	                "distance": 400,
-	                "duration": 4
-	            }
-	        }
-	    }
-	}} />
-    )
-  }
+        className={"particles-js-canvas-el"}
+        style={this.divStyle}
+        params={{
+          particles: {
+            number: {
+              value: 88,
+              density: {
+                enable: false,
+              },
+            },
+            size: {
+              value: 8,
+              random: true,
+              anim: {
+                speed: 4,
+                size_min: 1,
+              },
+            },
+            line_linked: {
+              enable: false,
+            },
+            move: {
+              random: true,
+              speed: 1,
+              direction: "top",
+              out_mode: "out",
+            },
+          },
+          interactivity: {
+            events: {
+              onhover: {
+                enable: true,
+                mode: "bubble",
+              },
+              onclick: {
+                enable: true,
+                mode: "repulse",
+              },
+            },
+            modes: {
+              bubble: {
+                distance: 250,
+                duration: 2,
+                size: 0,
+                opacity: 0,
+              },
+              repulse: {
+                distance: 400,
+                duration: 4,
+              },
+            },
+          },
+        }}
+      />
+    );
+  };
 
   getRandomInt = (max) => {
     return Math.floor(Math.random() * Math.floor(max));
