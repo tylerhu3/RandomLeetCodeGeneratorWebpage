@@ -12,10 +12,10 @@ class App extends React.Component {
     theProblem: null,
   };
 
-  constructor() {
-    super();
-    // this.vantaRef = React.createRef();
-  }
+  // constructor() {
+  //   super();
+  //   // this.vantaRef = React.createRef();
+  // }
 
   componentDidMount() {
     let easy = [];
@@ -55,7 +55,7 @@ class App extends React.Component {
       onClick={() => this.openInNewTab(this.state.theProblem.url)}
     >
       <Typing
-      loop={false}
+    hideCursor={false}
         key={new Date().getTime()} //force a component re-render
       >
         <span >
