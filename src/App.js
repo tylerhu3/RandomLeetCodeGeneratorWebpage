@@ -2,7 +2,6 @@ import React from "react";
 import "./App.css";
 import jsonData from "./data2.json";
 import { Button } from "react-bootstrap";
-import Typing from "react-typing-animation";
 
 class App extends React.Component {
   state = {
@@ -50,22 +49,15 @@ class App extends React.Component {
 
   AnimatedTypingComponent = () => (
     <div
-      style={{ width: "100%",  textShadow: '4px 4px 4px #FFFFFF',
-      color: "black", fontSize: "290%" }}
+      
       onClick={() => this.openInNewTab(this.state.theProblem.url)}
     >
-      <Typing
-    hideCursor={false}
-        key={new Date().getTime()} //force a component re-render
-      >
-        <span >
+        <h1>
           {" "}
           {this.state.theProblem
-            ? this.state.theProblem.title + "SSDS"
+            ? this.state.theProblem.title
             : ""}{" "}
-        </span>
-        <Typing.Backspace count={5} />
-      </Typing>
+        </h1>
     </div>
   );
 
@@ -75,16 +67,21 @@ class App extends React.Component {
     return (
       <div className={"App"}>
 
-        <div className={"mainContent"}>
-          {this.AnimatedTypingComponent()}
-          <div style={this.contentStyle}>
+        <div className={"mainContent"} >
+        <h1 style={this.problemTitleStyle} >
+          {" "}
+          {this.state.theProblem
+            ? this.state.theProblem.title
+            : ""}{" "}
+        </h1>
+          <div style={this.buttonContainer}>
             <Button
               style={this.buttonStyle}
               size="lg"
               variant="primary"
               onClick={() => this.openInNewTab(problem.url)}
             >
-              Try It{" "}
+              Try
             </Button>
             <Button
               style={this.buttonStyle}
@@ -93,7 +90,17 @@ class App extends React.Component {
             >
               New Question{" "}
             </Button>
-            <Button
+
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  difficultyButtons = () => {
+    return(
+      <div>
+                    <Button
               style={this.buttonStyle}
               variant="success"
               onClick={this.randomEasy}
@@ -114,10 +121,24 @@ class App extends React.Component {
             >
               New Hard Question{" "}
             </Button>
-          </div>
-        </div>
       </div>
-    );
+    )    
+  }
+
+  problemTitleStyle = {
+    position: 'relative',
+    textShadow: '2px 2px 5px white',
+    marginTop: '2em',
+    fontSize: '60px',
+    fontWeight: 'bold',
+    color: 'black',
+    fontFamily: "Pangolin",
+    width:'auto',
+    overflow: 'hidden', /* Ensures the content is not revealed until the animation */
+    borderRight: '0.05em solid', /* The typwriter cursor */
+    letterSpacing: '0.02em',
+    whiteSpace: 'nowrap', /* Keeps the content on a single line */
+    animation: 'typing 3s steps(100, end), blink-caret 0.5s step-end infinite',
   }
 
   miscButtonStyle = {
@@ -126,13 +147,12 @@ class App extends React.Component {
     bottom: 0,
   };
 
-  contentStyle = {
-    position: "relative",
-    zIndex: "2",
-  };
+  buttonContainer = {
+    marginTop: "300px",
 
-  titleStyle = {
-    marginBottom: "15px",
+    position: "absolute",
+    zIndex: "2"
+
   };
 
   buttonStyle = {
