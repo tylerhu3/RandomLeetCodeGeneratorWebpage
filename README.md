@@ -1,7 +1,7 @@
 
 What is this?
 -------------------------
-A random LeetCode question generator
+Website that generates random LeetCode questions
 
 Install Instructions
 -------------------------
