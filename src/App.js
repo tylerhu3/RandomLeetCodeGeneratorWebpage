@@ -167,7 +167,7 @@ class App extends React.Component {
             variant="danger"
             onClick={this.dangerResponse}
           >
-            DANGER{" "}
+            DANGER: Do Not Click{" "}
           </Button>
         </div>
         <this.videoModal />
@@ -197,17 +197,17 @@ class App extends React.Component {
   DangerStyle = {
     position: "relative",
     right: -1000,
-    bottom: 150,
+    bottom: -250,
     marginTop: "30px",
     zIndex: "4",
   };
 
   DangerModal = {
     fontSize: "24px",
-    color: "white",
+    color: "black",
     position: "relative",
     right: -1000,
-    bottom: 150,
+    bottom: -250,
     marginTop: "30px",
     zIndex: "4",
   };
