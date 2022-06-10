@@ -170,6 +170,7 @@ class App extends React.Component {
             DANGER{" "}
           </Button>
         </div>
+        <this.videoModal />
       </div>
     );
   }
@@ -245,25 +246,29 @@ class App extends React.Component {
     this.setState({ theProblem: prob });
   };
 
-  VideoModal = (props) => {
+  videoModal = () => {
     return (
       <div
-        style={{
-          position: "fixed",
-          top: 0,
-          bottom: 0,
-          left: 0,
-          right: 0,
-          backgroundColor: "rgba(0,0,0,0.5)",
-        }}
+        // style={{
+        //   position: "fixed",
+        //   top: 0,
+        //   bottom: 0,
+        //   left: 0,
+        //   right: 0,
+        //   backgroundColor: "rgba(0,0,0,0.5)",
+        // }}
       >
         <iframe
-          title={props.src}
           allowFullScreen
           frameBorder="0"
           height="315px"
-          src={props.src}
+          
+          src="https://www.youtube.com/embed/tbZ_rF8Xlsc"
+
+          
           width="560px"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          title="Embedded youtube"
         />
       </div>
     );
